@@ -8,6 +8,10 @@
         <servlet-name>registroServlet</servlet-name>
         <servlet-class>controlador.registroServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>usuarioServlet</servlet-name>
+        <servlet-class>controlador.usuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>registroServlet</servlet-name>
         <url-pattern>/registroServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>usuarioServlet</servlet-name>
+        <url-pattern>/usuarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
