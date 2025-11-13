@@ -2,29 +2,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WorkNest - Login</title>
+    <title>Registrar Usuario</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #6aa6f8, #b3d1ff);
+            background-color: #eef2f3;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-        .login-box {
+        .form-container {
             background-color: white;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-            width: 350px;
+            width: 380px;
         }
-        h1 {
+        h2 {
             text-align: center;
+            margin-bottom: 25px;
             color: #333;
-            margin-bottom: 30px;
         }
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
@@ -54,15 +54,25 @@
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h1>WorkNest</h1>
-        <form action="validarLogin.jsp" method="post">
-            <input type="text" name="usuario" placeholder="Usuario" required>
-            <input type="password" name="clave" placeholder="Clave" required>
-            <button type="submit">Ingresar</button>
-        </form>
-        <a href="registrar.jsp">¿No tienes cuenta? Regístrate</a>
-        <a href="#">¿Olvidaste tu contraseña?</a>
+    <div class="form-container">
+        <h2>Registrar Usuario</h2>
+        <form action="RegistroServlet" method="post">
+    <input type="text" name="identificacion" placeholder="Identificación" required>
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido" placeholder="Apellido" required>
+    <input type="email" name="email" placeholder="Correo electrónico" required>
+    <input type="text" name="usuario" placeholder="Usuario" required>
+    <input type="password" name="clave" placeholder="Clave" required>
+    <select name="id_perfil" required>
+        <option value="">Seleccione perfil</option>
+        <option value="1">Estudiante</option>
+        <option value="2">Profesor</option>
+        <option value="3">Administrador</option>
+    </select>
+    <button type="submit">Registrar</button>
+</form>
+
+        <a href="index.jsp">Volver al login</a>
     </div>
 </body>
 </html>
