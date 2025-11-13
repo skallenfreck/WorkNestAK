@@ -73,7 +73,7 @@
     <div class="derecha">
 <h2>Eliminar Usuario</h2>
 
-<form action="UsuarioServlet" method="post">
+<form action="usuarioServlet" method="post">
     <input type="hidden" name="accion" value="eliminar">
 
     <label>Identificación del Usuario</label>

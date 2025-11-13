@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
+@WebServlet(name = "registroServlet", urlPatterns = {"/registroServlet"})
 public class RegistroServlet extends HttpServlet {
 
     @Override
@@ -47,12 +47,12 @@ public class RegistroServlet extends HttpServlet {
 
             if (filas > 0) {
                 out.println("<script>");
-                out.println("alert('✅ Usuario registrado con éxito');");
+                out.println("alert(' Usuario registrado con éxito');");
                 out.println("window.location='index.jsp';");
                 out.println("</script>");
             } else {
                 out.println("<script>");
-                out.println("alert('⚠️ No se pudo registrar el usuario');");
+                out.println("alert('️ No se pudo registrar el usuario');");
                 out.println("window.location='registrar.jsp';");
                 out.println("</script>");
             }

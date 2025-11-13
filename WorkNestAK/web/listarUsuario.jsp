@@ -66,7 +66,7 @@
 
         <a href="agregarUsuario.jsp">Agregar Usuario</a><br><br>
         <a href="editarUsuario.jsp">Editar Usuario</a><br><br>
-        <a href="listarUsuarios.jsp">Listar Usuarios</a><br><br>
+        <a href="listarUsuario.jsp">Listar Usuarios</a><br><br>
         <a href="eliminarUsuario.jsp">Eliminar Usuario</a><br><br>
     </div>
 
@@ -75,7 +75,6 @@
 
 <table border="1" cellpadding="10">
     <tr>
-        <th>ID</th>
         <th>Identificación</th>
         <th>Nombre</th>
         <th>Apellido</th>
@@ -85,19 +84,18 @@
     </tr>
 
 <%
-    dao.UsuarioDAO dao = new dao.UsuarioDAO();
-    java.util.List<modelo.Usuario> lista = dao.listarUsuarios();
+    modelo.usuarioDAO dao = new modelo.usuarioDAO();
+    java.util.List<modelo.usuario> lista = dao.listarUsuario();
 
-    for (modelo.Usuario u : lista) {
+    for (modelo.usuario u : lista) {
 %>
     <tr>
-        <td><%= u.getId() %></td>
         <td><%= u.getIdentificacion() %></td>
         <td><%= u.getNombre() %></td>
         <td><%= u.getApellido() %></td>
         <td><%= u.getEmail() %></td>
         <td><%= u.getUsuario() %></td>
-        <td><%= u.getId_perfil() == 1 ? "Estudiante" : "Administrador" %></td>
+        <td><%= u.getIdPerfil() == 1 ? "Estudiante" : "Administrador" %></td>
     </tr>
 <%
     }

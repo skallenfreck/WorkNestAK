@@ -34,7 +34,7 @@ public class UsuarioServlet extends HttpServlet {
         switch (accion) {
 
             case "listar":
-                listarUsuarios(request, response);
+                listarUsuario(request, response);
                 break;
 
             case "editar":
@@ -46,7 +46,7 @@ public class UsuarioServlet extends HttpServlet {
                 break;
 
             default:
-                listarUsuarios(request, response);
+                listarUsuario(request, response);
         }
     }
 
@@ -71,7 +71,7 @@ public class UsuarioServlet extends HttpServlet {
                 break;
 
             default:
-                listarUsuarios(request, response);
+                listarUsuario(request, response);
         }
     }
 
@@ -79,11 +79,11 @@ public class UsuarioServlet extends HttpServlet {
     //      MÉTODOS
     // =======================
 
-    private void listarUsuarios(HttpServletRequest request, HttpServletResponse response)
+    private void listarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<usuario> lista = usuarioDAO.listarUsuarios();
-        request.setAttribute("listaUsuarios", lista);
+        List<usuario> lista = usuarioDAO.listarUsuario();
+        request.setAttribute("listaUsuario", lista);
         request.getRequestDispatcher("listarUsuario.jsp").forward(request, response);
     }
 
@@ -111,7 +111,7 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.agregarUsuario(u);
 
-        response.sendRedirect("UsuarioServlet?accion=listar");
+        response.sendRedirect("usuarioServlet?accion=listar");
     }
 
     private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -130,7 +130,7 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.actualizarUsuario(u);
 
-        response.sendRedirect("UsuarioServlet?accion=listar");
+        response.sendRedirect("usuarioServlet?accion=listar");
     }
 
     private void eliminarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -140,6 +140,6 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.eliminarUsuario(id);
 
-        response.sendRedirect("UsuarioServlet?accion=listar");
+        response.sendRedirect("usuarioServlet?accion=listar");
     }
 }

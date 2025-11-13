@@ -7,49 +7,46 @@ import modelo.usuario;
 
 public class usuarioDAO {
 
-    private Connection conn;
-
-    public usuarioDAO(Connection conn) {
-        this.conn = conn;
-    }
+   private Connection conn;
 
     public usuarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        conn = conexion.getConexion(); // 🔹 inicializamos la conexión
     }
 
-    // ------------------------------
-    // INSERTAR USUARIO
-    // ------------------------------
-    public boolean agregarUsuario(usuario usuario) {
-        String sql = "INSERT INTO usuario (nombre, apellido, email, clave, id_perfil) VALUES (?, ?, ?, ?, ?)";
-
+    // =====================
+    // Ejemplo agregarUsuario
+    // =====================
+    public void agregarUsuario(usuario u) {
+        String sql = "INSERT INTO usuarios (identificacion, nombre, apellido, email, usuario, clave, id_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, usuario.getNombre());
-            ps.setString(2, usuario.getApellido());
-            ps.setString(3, usuario.getEmail());
-            ps.setString(4, usuario.getClave());
-            ps.setInt(5, usuario.getIdPerfil());
-            return ps.executeUpdate() > 0;
-
+            ps.setString(1, u.getIdentificacion());
+            ps.setString(2, u.getNombre());
+            ps.setString(3, u.getApellido());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getUsuario());
+            ps.setString(6, u.getClave());
+            ps.setInt(7, u.getIdPerfil());
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
+
 
     // ------------------------------
     // ACTUALIZAR USUARIO
     // ------------------------------
     public boolean actualizarUsuario(usuario usuario) {
-        String sql = "UPDATE usuario SET nombre=?, apellido=?, email=?, clave=?, id_perfil=? WHERE id=?";
+        String sql = "UPDATE usuarios SET nombre=?, apellido=?, email=?, usuario=? clave=?, id_perfil=? WHERE id=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getEmail());
-            ps.setString(4, usuario.getClave());
-            ps.setInt(5, usuario.getIdPerfil());
-            ps.setInt(6, usuario.getId());
+            ps.setString(4, usuario.getUsuario());
+            ps.setString(5, usuario.getClave());
+            ps.setInt(6, usuario.getIdPerfil());
+            ps.setInt(7, usuario.getId());
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -62,7 +59,7 @@ public class usuarioDAO {
     // ELIMINAR USUARIO
     // ------------------------------
     public boolean eliminarUsuario(int id) {
-        String sql = "DELETE FROM usuario WHERE id=?";
+        String sql = "DELETE FROM usuarios WHERE id=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -78,7 +75,7 @@ public class usuarioDAO {
     // BUSCAR USUARIO POR ID
     // ------------------------------
     public usuario obtenerUsuarioPorId(int id) {
-        String sql = "SELECT * FROM usuario WHERE id=?";
+        String sql = "SELECT * FROM usuarios WHERE id=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -100,7 +97,7 @@ public class usuarioDAO {
     // BUSCAR USUARIO POR EMAIL (LOGIN)
     // ------------------------------
     public usuario obtenerPorEmail(String email) {
-        String sql = "SELECT * FROM usuario WHERE email=?";
+        String sql = "SELECT * FROM usuarios WHERE email=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -121,10 +118,10 @@ public class usuarioDAO {
     // ------------------------------
     // LISTAR TODOS LOS USUARIOS
     // ------------------------------
-    public List<usuario> listarUsuarios() {
+    public List<usuario> listarUsuario() {
         List<usuario> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuarios";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 

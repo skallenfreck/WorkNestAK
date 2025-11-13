@@ -66,14 +66,14 @@
 
         <a href="agregarUsuario.jsp">Agregar Usuario</a><br><br>
         <a href="editarUsuario.jsp">Editar Usuario</a><br><br>
-        <a href="listarUsuarios.jsp">Listar Usuarios</a><br><br>
+        <a href="listarUsuario.jsp">Listar Usuarios</a><br><br>
         <a href="eliminarUsuario.jsp">Eliminar Usuario</a><br><br>
     </div>
 
     <div class="derecha">
 <h2>Editar Usuario</h2>
 
-<form action="UsuarioServlet" method="post">
+<form action="usuarioServlet" method="post">
     <input type="hidden" name="accion" value="editar">
 
     <label>Identificación (para buscar)</label>

@@ -56,7 +56,7 @@
 <body>
     <div class="form-container">
         <h2>Registrar Usuario</h2>
-        <form action="RegistroServlet" method="post">
+        <form action="registroServlet" method="post">
     <input type="text" name="identificacion" placeholder="Identificación" required>
     <input type="text" name="nombre" placeholder="Nombre" required>
     <input type="text" name="apellido" placeholder="Apellido" required>
