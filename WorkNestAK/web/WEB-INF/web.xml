@@ -2,19 +2,19 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>controlador.loginServlet</servlet-class>
+        <servlet-class>controlador.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>registroServlet</servlet-name>
-        <servlet-class>controlador.registroServlet</servlet-class>
+        <servlet-class>controlador.RegistroServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>usuarioServlet</servlet-name>
-        <servlet-class>controlador.usuarioServlet</servlet-class>
+        <servlet-class>controlador.UsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>cerrarSesionServlet</servlet-name>
-        <servlet-class>controlador.cerrarSesionServlet</servlet-class>
+        <servlet-class>controlador.CerrarSesionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -33,8 +33,6 @@
         <url-pattern>/cerrarSesionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

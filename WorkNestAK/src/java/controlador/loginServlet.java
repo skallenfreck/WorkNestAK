@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
         try (Connection con = conexion.getConexion()) {
 
-            String sql = "SELECT usuario, nombre, id_perfil FROM usuario "
+            String sql = "SELECT usuario, nombre, id_perfil FROM usuarios "
                        + "WHERE usuario=? AND clave=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, user);

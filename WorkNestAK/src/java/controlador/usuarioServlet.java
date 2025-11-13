@@ -17,7 +17,7 @@ import modelo.usuario;
 import modelo.usuarioDAO;
 
 @WebServlet("/usuarioServlet")
-public class usuarioServlet extends HttpServlet {
+public class UsuarioServlet extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();
 

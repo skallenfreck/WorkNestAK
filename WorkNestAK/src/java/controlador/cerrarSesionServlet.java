@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author karin
  */
-public class cerrarSesionServlet extends HttpServlet {
+public class CerrarSesionServlet extends HttpServlet {
 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

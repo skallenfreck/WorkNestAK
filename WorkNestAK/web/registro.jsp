@@ -71,7 +71,7 @@
     <button type="submit">Registrar</button>
 </form>
 
-        <a href="index.jsp">Volver al login</a>
+        <a href="login.jsp">Volver al login</a>
     </div>
 </body>
 </html>

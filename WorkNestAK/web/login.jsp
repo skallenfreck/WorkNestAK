@@ -56,13 +56,26 @@
 <body>
     <div class="login-box">
         <h1>WorkNest</h1>
-        <form action="validarLogin.jsp" method="post">
+        <% 
+    String error = request.getParameter("error");
+    if (error != null) {
+        if (error.equals("1")) {
+%>
+            <p style="color:red; text-align:center;">Usuario o clave incorrectos</p>
+<%      } else if (error.equals("2")) { %>
+            <p style="color:red; text-align:center;">Error de conexión, intente más tarde</p>
+<%      } else if (error.equals("perfil")) { %>
+            <p style="color:red; text-align:center;">Perfil desconocido</p>
+<%      }
+    }
+%>
+
+        <form action="LoginServlet" method="post">
             <input type="text" name="usuario" placeholder="Usuario" required>
             <input type="password" name="clave" placeholder="Clave" required>
             <button type="submit">Ingresar</button>
         </form>
-        <a href="registrar.jsp">¿No tienes cuenta? Regístrate</a>
-        <a href="#">¿Olvidaste tu contraseña?</a>
+        <a href="registro.jsp">¿No tienes cuenta? Regístrate</a>
     </div>
 </body>
 </html>

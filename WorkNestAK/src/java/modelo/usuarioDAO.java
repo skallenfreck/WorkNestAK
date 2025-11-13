@@ -13,6 +13,10 @@ public class usuarioDAO {
         this.conn = conn;
     }
 
+    public usuarioDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     // ------------------------------
     // INSERTAR USUARIO
     // ------------------------------
