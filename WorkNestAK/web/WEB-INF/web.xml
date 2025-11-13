@@ -12,6 +12,10 @@
         <servlet-name>usuarioServlet</servlet-name>
         <servlet-class>controlador.usuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cerrarSesionServlet</servlet-name>
+        <servlet-class>controlador.cerrarSesionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>usuarioServlet</servlet-name>
         <url-pattern>/usuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cerrarSesionServlet</servlet-name>
+        <url-pattern>/cerrarSesionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

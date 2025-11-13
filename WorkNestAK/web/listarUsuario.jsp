@@ -56,7 +56,7 @@
 
     <div>
         <a class="btn-header" href="verPerfil.jsp">Ver Perfil</a>
-        <a class="btn-header" href="CerrarSesionServlet">Cerrar Sesión</a>
+        <a class="btn-header" href="cerrarSesionServlet">Cerrar Sesión</a>
     </div>
 </header>
 

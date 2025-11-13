@@ -81,6 +81,21 @@
         .btn-admin:hover {
             background: #2c3e94;
             transform: scale(1.03);
+            
+         .btnLogout {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btnLogout:hover {
+    background-color: #c0392b;
+}
+
         }
     </style>
 </head>
@@ -97,8 +112,8 @@
             <button type="submit">Ver Perfil</button>
         </form>
 
-        <form action="logout.jsp" method="post" style="display:inline;">
-            <button type="submit">Cerrar Sesión</button>
+        <form action="cerrarSesionServlet" method="get">
+            <button type="submit" class="btnLogout">Cerrar sesión</button>
         </form>
     </div>
 </header>
