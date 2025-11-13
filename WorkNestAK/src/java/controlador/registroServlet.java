@@ -33,7 +33,7 @@ public class registroServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             Connection con = conexion.getConexion();
-            String sql = "INSERT INTO usuario (identificacion, nombre, apellido, email, usuario, clave, id_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuarios (identificacion, nombre, apellido, email, usuario, clave, id_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, identificacion);
             ps.setString(2, nombre);

@@ -66,8 +66,7 @@
     <select name="id_perfil" required>
         <option value="">Seleccione perfil</option>
         <option value="1">Estudiante</option>
-        <option value="2">Profesor</option>
-        <option value="3">Administrador</option>
+        <option value="2">Administrador</option>
     </select>
     <button type="submit">Registrar</button>
 </form>
