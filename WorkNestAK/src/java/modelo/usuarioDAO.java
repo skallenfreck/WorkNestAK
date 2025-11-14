@@ -37,7 +37,7 @@ public class usuarioDAO {
     // ACTUALIZAR USUARIO
     // ------------------------------
     public boolean actualizarUsuario(usuario usuario) {
-        String sql = "UPDATE usuarios SET nombre=?, apellido=?, email=?, usuario=? clave=?, id_perfil=? WHERE id=?";
+        String sql = "UPDATE usuarios SET nombre=?, apellido=?, email=?, usuario=?, clave=?, id_perfil=? WHERE identificacion=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
@@ -46,8 +46,10 @@ public class usuarioDAO {
             ps.setString(4, usuario.getUsuario());
             ps.setString(5, usuario.getClave());
             ps.setInt(6, usuario.getIdPerfil());
-            ps.setInt(7, usuario.getId());
-            return ps.executeUpdate() > 0;
+            ps.setString(7, usuario.getIdentificacion());
+            
+            ps.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +99,7 @@ public class usuarioDAO {
                 u.setEmail(rs.getString("email"));
                 u.setUsuario(rs.getString("usuario"));
                 u.setClave(rs.getString("clave"));
-                u.setIdPerfil(rs.getInt("perfil"));
+                u.setIdPerfil(rs.getInt("id_perfil"));
             }
 
         } catch (SQLException e) {
@@ -108,28 +110,6 @@ public class usuarioDAO {
             try { if(con != null) con.close(); } catch(Exception e) {}
         }
         return u;
-    }
-
-    // ------------------------------
-    // BUSCAR USUARIO POR EMAIL (LOGIN)
-    // ------------------------------
-    public usuario obtenerPorEmail(String email) {
-        String sql = "SELECT * FROM usuarios WHERE email=?";
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return mapUsuario(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     // ------------------------------
@@ -159,13 +139,16 @@ public class usuarioDAO {
     // MAPEO GENERAL DE USUARIO
     // ------------------------------
     private usuario mapUsuario(ResultSet rs) throws SQLException {
-        usuario u = new usuario();
-        u.setId(rs.getInt("id"));
-        u.setNombre(rs.getString("nombre"));
-        u.setApellido(rs.getString("apellido"));
-        u.setEmail(rs.getString("email"));
-        u.setClave(rs.getString("clave"));
-        u.setIdPerfil(rs.getInt("id_perfil"));
-        return u;
-    }
+    usuario u = new usuario();
+
+    u.setIdentificacion(rs.getString("identificacion"));
+    u.setNombre(rs.getString("nombre"));
+    u.setApellido(rs.getString("apellido"));
+    u.setEmail(rs.getString("email"));
+    u.setUsuario(rs.getString("usuario"));  // <--- IMPORTANTE
+    u.setClave(rs.getString("clave"));
+    u.setIdPerfil(rs.getInt("id_perfil"));
+
+    return u;
+}
 }

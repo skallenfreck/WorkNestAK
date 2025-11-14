@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Panel</title>
+    <title>Editar Usuario</title>
     <style>
         body { 
             font-family: Arial; 
@@ -134,6 +134,9 @@
             cursor: pointer;
             font-size: 15px;
         }
+        label {
+            color: #D4C9BE;
+        }
         .form-container button {
             align-self: center;
             margin-top: 10px;
@@ -185,7 +188,7 @@
         
         <a href="agregarUsuario.jsp" class="btn-admin">Agregar Usuario</a>
         <a href="editarUsuario.jsp" class="btn-admin">Editar Usuario</a>
-        <a href="listarUsuario.jsp" class="btn-admin">Listar Usuarios</a>
+        <a href="usuarioServlet?accion=listar" class="btn-admin">Listar Usuarios</a>
         <a href="eliminarUsuario.jsp" class="btn-admin">Eliminar Usuario</a>
         
     </div>
@@ -200,13 +203,14 @@
 
 
             <% if (u == null) { %>
-            <form method="post" action="usuarioServlet">
+            <form method="get" action="usuarioServlet">
                 <label>Ingrese la Identificación:</label>
                 <input type="text" name="identificacion" required>
-                <input type="submit" name="accion" value="Buscar">
+                <button type="submit" name="accion" value="buscar">Buscar</button>
             </form>
             <% } else { %>
-            <form method="post" action="UsuarioServlet">
+            <form method="post" action="usuarioServlet">
+                <input type="hidden" name="accion" value="actualizar">
                 <input type="text" name="identificacion" value="<%= u.getIdentificacion() %>" readonly>
                 <input type="text" name="nombre" value="<%= u.getNombre() %>" required>
                 <input type="text" name="apellido" value="<%= u.getApellido() %>" required>
@@ -220,7 +224,7 @@
                     <option value="2">Administrador</option>
                 </select>
           
-                <button type="submit">Editar</button>
+                <button type="submit" name="accion" value="actualizar">Editar</button>
             </form>
         <% } %>
             

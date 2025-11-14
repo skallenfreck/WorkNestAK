@@ -131,7 +131,6 @@ public class UsuarioServlet extends HttpServlet {
 
         usuario u = new usuario();
 
-        u.setId(Integer.parseInt(request.getParameter("id")));
         u.setIdentificacion(request.getParameter("identificacion"));
         u.setNombre(request.getParameter("nombre"));
         u.setApellido(request.getParameter("apellido"));
@@ -141,6 +140,8 @@ public class UsuarioServlet extends HttpServlet {
         u.setIdPerfil(Integer.parseInt(request.getParameter("id_perfil")));
 
         usuarioDAO.actualizarUsuario(u);
+        
+        response.sendRedirect("editarUsuario.jsp");
 
     }
 

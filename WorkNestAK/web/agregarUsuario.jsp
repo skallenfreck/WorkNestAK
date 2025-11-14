@@ -184,7 +184,7 @@
         
         <a href="agregarUsuario.jsp" class="btn-admin">Agregar Usuario</a>
         <a href="editarUsuario.jsp" class="btn-admin">Editar Usuario</a>
-        <a href="listarUsuario.jsp" class="btn-admin">Listar Usuarios</a>
+        <a href="usuarioServlet?accion=listar" class="btn-admin">Listar Usuarios</a>
         <a href="eliminarUsuario.jsp" class="btn-admin">Eliminar Usuario</a>
         
     </div>

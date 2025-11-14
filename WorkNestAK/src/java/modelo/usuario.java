@@ -2,7 +2,6 @@ package modelo;
 
 public class usuario {
     
-    private int id;
     private String identificacion;
     private String nombre;
     private String apellido;
@@ -24,13 +23,7 @@ public class usuario {
         this.idPerfil = idPerfil;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     public String getIdentificacion() {
         return identificacion;
