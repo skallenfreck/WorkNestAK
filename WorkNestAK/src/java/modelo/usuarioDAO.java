@@ -74,23 +74,40 @@ public class usuarioDAO {
     // ------------------------------
     // BUSCAR USUARIO POR ID
     // ------------------------------
-    public usuario obtenerUsuarioPorId(int id) {
-        String sql = "SELECT * FROM usuarios WHERE id=?";
+    public usuario consultarUsuario(String identificacion) {
+        conexion cn = new conexion();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        usuario u = null;
 
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        String sql = "SELECT * FROM usuarios WHERE identificacion=?";
 
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+        try {
+            con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, identificacion);
+            rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return mapUsuario(rs);
+            if(rs.next()) {
+                u = new usuario();
+                u.setIdentificacion(rs.getString("identificacion"));
+                u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
+                u.setEmail(rs.getString("email"));
+                u.setUsuario(rs.getString("usuario"));
+                u.setClave(rs.getString("clave"));
+                u.setIdPerfil(rs.getInt("perfil"));
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error al consultar usuario: " + e.getMessage());
+        } finally {
+            try { if(rs != null) rs.close(); } catch(Exception e) {}
+            try { if(ps != null) ps.close(); } catch(Exception e) {}
+            try { if(con != null) con.close(); } catch(Exception e) {}
         }
-
-        return null;
+        return u;
     }
 
     // ------------------------------

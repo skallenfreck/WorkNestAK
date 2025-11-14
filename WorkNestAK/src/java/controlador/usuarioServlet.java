@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controlador;
 
 import java.io.IOException;
@@ -26,13 +22,28 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String accion = request.getParameter("accion");
+        usuarioDAO udao = new usuarioDAO();
+        usuario u = new usuario();
 
         if (accion == null) {
             accion = "listar";
         }
 
         switch (accion) {
+            
+            case "buscar":
+                String idBuscar = request.getParameter("identificacion");
+                usuario usuarioBuscado = udao.consultarUsuario(idBuscar);
 
+                if (usuarioBuscado != null) {
+                    request.setAttribute("usuario", usuarioBuscado);
+                    request.getRequestDispatcher("editarUsuario.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Usuario no encontrado");
+                    request.getRequestDispatcher("editarUsuario.jsp").forward(request, response);
+                }
+                break;
+                
             case "listar":
                 listarUsuario(request, response);
                 break;
@@ -90,8 +101,8 @@ public class UsuarioServlet extends HttpServlet {
     private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        usuario u = usuarioDAO.obtenerUsuarioPorId(id);
+        String id = request.getParameter("id");
+        usuario u = usuarioDAO.consultarUsuario(id);
         request.setAttribute("usuario", u);
         request.getRequestDispatcher("editarUsuario.jsp").forward(request, response);
     }
@@ -105,13 +116,14 @@ public class UsuarioServlet extends HttpServlet {
         u.setNombre(request.getParameter("nombre"));
         u.setApellido(request.getParameter("apellido"));
         u.setEmail(request.getParameter("email"));
-        u.setUsuario(request.getParameter("usuario"));
+        u.setUsuario(request.getParameter("noUsuario"));
         u.setClave(request.getParameter("clave"));
         u.setIdPerfil(Integer.parseInt(request.getParameter("id_perfil"))); // 1 o 2
 
         usuarioDAO.agregarUsuario(u);
+        
+        response.sendRedirect("agregarUsuario.jsp");
 
-        response.sendRedirect("usuarioServlet?accion=listar");
     }
 
     private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -130,7 +142,6 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.actualizarUsuario(u);
 
-        response.sendRedirect("usuarioServlet?accion=listar");
     }
 
     private void eliminarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -139,7 +150,8 @@ public class UsuarioServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         usuarioDAO.eliminarUsuario(id);
+        
+        response.sendRedirect("administradorDS.jsp");
 
-        response.sendRedirect("usuarioServlet?accion=listar");
     }
 }

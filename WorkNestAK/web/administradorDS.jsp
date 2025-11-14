@@ -18,39 +18,57 @@
 
     <style>
         body {
+            background: #D4C9BE;
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            display: grid;
-            grid-template-rows: 70px auto;
+            display: flex;
+            flex-direction: column;
             height: 100vh;
+        }
+
+        .contenido {
+            flex: 1;             
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;     
+            padding: 40px;
         }
 
         /* Encabezado */
         header {
-            background: #3f51b5;
-            color: white;
+            background: #123458;
+            color: #D4C9BE;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            font-size: 1.2em;
+            padding: 0 40px;
+            font-size: 1.5em;        
+            height: 100px;           
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
+        header .right-buttons {
+            display: flex;           
+            gap: 15px;               
+            align-items: center;     
+        }
+        
         header .right-buttons button {
-            margin-left: 15px;
-            padding: 8px 15px;
-            background: white;
-            color: #3f51b5;
+            padding: 12px 20px;
+            background: #D4C9BE;
+            color: #123458;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
+            min-width: 140px;   
             transition: 0.3s;
         }
 
         header .right-buttons button:hover {
-            background: #ccc;
+            background: #F1EFEC;
         }
 
         /* Cuerpo */
@@ -60,6 +78,7 @@
         }
 
         h2 {
+            color: #123458;
             font-size: 26px;
             margin-bottom: 30px;
         }
@@ -67,8 +86,8 @@
         .btn-admin {
             display: block;
             width: 260px;
-            background: #3f51b5;
-            color: white;
+            background: #123458;
+            color: #D4C9BE;
             padding: 15px;
             margin: 15px auto;
             text-align: center;
@@ -79,23 +98,8 @@
         }
 
         .btn-admin:hover {
-            background: #2c3e94;
+            background: #123460;
             transform: scale(1.03);
-            
-         .btnLogout {
-    background-color: #e74c3c;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-}
-
-.btnLogout:hover {
-    background-color: #c0392b;
-}
-
         }
     </style>
 </head>

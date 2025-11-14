@@ -12,9 +12,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      background: #123458;
       font-family: "Poppins", sans-serif;
-      color: white;
+      color: #D4C9BE;
       text-align: center;
     }
     h1 {
@@ -26,8 +26,8 @@
       margin-bottom: 30px;
     }
     .btn {
-      background: white;
-      color: #66a6ff;
+      background: #D4C9BE;
+      color: #123458;
       border: none;
       padding: 12px 25px;
       border-radius: 25px;
@@ -36,8 +36,8 @@
       transition: all 0.3s;
     }
     .btn:hover {
-      background: #4d8ff7;
-      color: white;
+      background: #F1EFEC;
+      color: #030303;
       transform: scale(1.05);
     }
   </style>
