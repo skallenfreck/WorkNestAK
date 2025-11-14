@@ -140,7 +140,7 @@
         .form-container button {
             align-self: center;
             margin-top: 10px;
-            margin-bottom: 5px;   /* Esto asegura que NO quede por fuera */
+            margin-bottom: 5px;   
         }
         .btn-usuario:hover {
             background: #123460;

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="modelo.usuario" %>
 <%
     // Recuperar usuario en sesión
     HttpSession sesion = request.getSession(false);
@@ -12,19 +13,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Panel</title>
+    <title>Eliminar Usuario</title>
     <style>
-        body { font-family: Arial; margin: 0; padding: 0; }
-        header {
-            background: #4A76A8; color: white;
-            padding: 15px; display: flex; justify-content: space-between;
-            align-items: center;
+        body { 
+            font-family: Arial; 
+            margin: 0; 
+            padding: 0; 
         }
-        .btn-header {
-            background: white; color: #4A76A8;
-            padding: 8px 12px; border-radius: 5px;
-            text-decoration: none; margin-left: 10px;
+        
+        /* Encabezado */
+        header {
+            background: #123458;
+            color: #D4C9BE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 1.5em;        
+            height: 100px;           
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header .right-buttons {
+            display: flex;           
+            gap: 15px;               
+            align-items: center;     
+        }
+        
+        header .right-buttons button {
+            padding: 12px 20px;
+            background: #D4C9BE;
+            color: #123458;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
+            min-width: 140px;   
+            transition: 0.3s;
+        }
+
+        header .right-buttons button:hover {
+            background: #F1EFEC;
+        }
+        .form-container {
+            background-color: #123458;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            width: 380px;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         .contenedor {
             display: flex;
@@ -32,20 +73,96 @@
         }
         .izquierda {
             width: 25%;
-            background: #F0F0F0;
+            background: #D4C9BE;
             padding: 20px;
+            display: flex;
+            flex-direction: column;      
+            justify-content: center;     
+            align-items: center;         
+            gap: 15px;                   
+            text-align: center; 
         }
         .derecha {
+            background: #F1EFEC;
             width: 75%;
-            padding: 20px;
+            display: flex;                 
+            justify-content: center;       
+            align-items: flex-start; 
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
-        input, select {
-            width: 90%; padding: 8px; margin-bottom: 10px;
+        h1 {
+            color: #D4C9BE;
+            font-size: 28px;
+        }
+        h2 {
+            color: #D4C9BE;
+            font-size: 22px;
+            
+        }
+        h3 {
+            color: #123458;
+            font-size: 22px;
+        }
+        input {
+            background: #D4C9BE;
+            width: 90%;
+            padding: 12px;
+            margin: 8px 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        select {
+            background: #D4C9BE;
+            width: 97%;
+            padding: 12px;
+            margin: 10px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
         }
         button {
-            padding: 10px 15px; background: #4A76A8;
-            color: white; border: none; border-radius: 5px;
+            display: block; 
+            width: 40%;
+            margin: 10px auto;
+            tex-aling: center;
+            background-color: #D4C9BE;
+            color: #123458;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 15px;
+        }
+        label {
+            color: #D4C9BE;
+        }
+        .form-container button {
+            align-self: center;
+            margin-top: 10px;
+            margin-bottom: 5px;   
+        }
+        .btn-usuario:hover {
+            background: #123460;
+            transform: scale(1.03);
+        }
+        .btn-admin {
+            display: block;
+            width: 260px;
+            background: #123458;
+            color: #D4C9BE;
+            padding: 15px;
+            margin: 15px auto;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-admin:hover {
+            background: #123460;
+            transform: scale(1.03);
         }
     </style>
 </head>
@@ -54,9 +171,14 @@
 <header>
     <h2>Hola, <%= nombreUsuario %></h2>
 
-    <div>
-        <a class="btn-header" href="verPerfil.jsp">Ver Perfil</a>
-        <a class="btn-header" href="cerrarSesionServlet">Cerrar Sesión</a>
+    <div class="right-buttons">
+        <form action="perfil.jsp" style="display:inline;">
+            <button type="submit">Ver Perfil</button>
+        </form>
+
+        <form action="cerrarSesionServlet" method="get">
+            <button type="submit" class="btnLogout">Cerrar sesión</button>
+        </form>
     </div>
 </header>
 
@@ -64,25 +186,50 @@
     <div class="izquierda">
         <h3>Panel Administrador</h3>
 
-        <a href="agregarUsuario.jsp">Agregar Usuario</a><br><br>
-        <a href="editarUsuario.jsp">Editar Usuario</a><br><br>
-        <a href="listarUsuarios.jsp">Listar Usuarios</a><br><br>
-        <a href="eliminarUsuario.jsp">Eliminar Usuario</a><br><br>
+        <a href="agregarUsuario.jsp" class="btn-admin">Agregar Usuario</a>
+        <a href="editarUsuario.jsp" class="btn-admin">Editar Usuario</a>
+        <a href="usuarioServlet?accion=listar" class="btn-admin">Listar Usuarios</a>
+        <a href="eliminarUsuario.jsp" class="btn-admin">Eliminar Usuario</a>
+        
     </div>
 
     <div class="derecha">
-<h2>Eliminar Usuario</h2>
+        <div clas="form-container">
+            <h2>Eliminar Usuario</h2>
+        
+            <form action="usuarioServlet" method="get">
+                <input type="hidden" name="accion" value="ConsultarEliminar">
+                <label>Identificación:</label><br>
+                <input type="text" name="identificacion" required>
+                <button type="submit" name="accion" value="buscar">Buscar</button>
+            </form>
 
-<form action="usuarioServlet" method="post">
-    <input type="hidden" name="accion" value="eliminar">
+        <%
+            usuario u = (usuario) request.getAttribute("usuario");
+            if (u != null) { %>
+        
+        <h3>Datos del Usuario:</h3>
+        <div class="info"><strong>Nombre:</strong> <%= u.getNombre() %> <%= u.getApellido() %></div>
+        <div class="info"><strong>Usuario:</strong> <%= u.getUsuario() %></div>
+        <div class="info"><strong>Email:</strong> <%= u.getEmail() %></div>
 
-    <label>Identificación del Usuario</label>
-    <input type="text" name="identificacion" required>
+        <form action="usuarioServlet" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
+            <input type="hidden" name="accion" value="Eliminar">
+            <input type="hidden" name="identificacion" value="<%= u.getIdentificacion() %>">
+            <button type="submit" class="btn">Confirmar eliminación</button>
+        </form>
 
-    <button type="submit">Eliminar</button>
-</form>
+        <form action="eliminarUsuario.jsp" method="get">
+            <button type="submit" class="btn cancel">Cancelar</button>
+        </form>
 
-</div></div>
+        <% } %>        
+
+
+
+</div>
+</div>
+</div>
 </body>
 </html>
 

@@ -51,6 +51,18 @@ public class UsuarioServlet extends HttpServlet {
             case "editar":
                 mostrarFormularioEditar(request, response);
                 break;
+                
+            case "ConsultarEliminar":
+    String idBuscarC = request.getParameter("identificacion");
+    usuario usuarioEliminar = udao.consultarUsuario(idBuscarC);
+    if (usuarioEliminar != null) {
+        request.setAttribute("usuario", usuarioEliminar);
+        request.getRequestDispatcher("eliminarUsuario.jsp").forward(request, response);
+    } else {
+        request.setAttribute("usuario", null);
+        request.getRequestDispatcher("eliminarUsuario.jsp").forward(request, response);
+    }
+    break;    
 
             case "eliminar":
                 eliminarUsuario(request, response);
