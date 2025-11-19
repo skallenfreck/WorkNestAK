@@ -160,9 +160,9 @@ public class UsuarioServlet extends HttpServlet {
     private void eliminarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        int identificacion = Integer.parseInt(request.getParameter("identificacion"));
 
-        usuarioDAO.eliminarUsuario(id);
+        usuarioDAO.eliminarUsuario(identificacion);
         
         response.sendRedirect("administradorDS.jsp");
 

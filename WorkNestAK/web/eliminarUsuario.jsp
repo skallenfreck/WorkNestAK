@@ -214,9 +214,9 @@
         <div class="info"><strong>Email:</strong> <%= u.getEmail() %></div>
 
         <form action="usuarioServlet" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
-            <input type="hidden" name="accion" value="Eliminar">
+            <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="identificacion" value="<%= u.getIdentificacion() %>">
-            <button type="submit" class="btn">Confirmar eliminación</button>
+            <button type="submit" class="btn">Confirmar</button>
         </form>
 
         <form action="eliminarUsuario.jsp" method="get">
