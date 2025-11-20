@@ -60,11 +60,11 @@ public class usuarioDAO {
     // ------------------------------
     // ELIMINAR USUARIO
     // ------------------------------
-    public boolean eliminarUsuario(int identificacion) {
+    public boolean eliminarUsuario(String identificacion) {
         String sql = "DELETE FROM usuarios WHERE identificacion=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, identificacion);
+            ps.setString(1, identificacion);
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {

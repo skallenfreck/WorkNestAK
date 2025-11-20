@@ -160,7 +160,7 @@ public class UsuarioServlet extends HttpServlet {
     private void eliminarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        int identificacion = Integer.parseInt(request.getParameter("identificacion"));
+        String identificacion = request.getParameter("identificacion");
 
         usuarioDAO.eliminarUsuario(identificacion);
         

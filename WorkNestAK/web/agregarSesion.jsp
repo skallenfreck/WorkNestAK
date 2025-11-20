@@ -3,14 +3,14 @@
 <%@ page import="java.util.GregorianCalendar" %>
 
 <%
-    // Obtener usuario desde sesión
-    String usuario = (String) session.getAttribute("usuario");
-
-    // Si no hay usuario, redirigir al login
-    if (usuario == null) {
+    // Recuperar usuario en sesión
+    HttpSession sesion = request.getSession(false);
+    if (sesion == null || sesion.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+
+    String nombreUsuario = (String) sesion.getAttribute("usuario");
 %>
 
 <%
@@ -137,8 +137,13 @@
 
         /* PANEL DERECHO */
         .derecha {
+            background: #F1EFEC;
             width: 75%;
-            padding: 25px;
+            justify-content: center;       
+            align-items: flex-start; 
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .titulo {
@@ -153,23 +158,39 @@
             color: #444;
         }
         
-        .btn-menu {
-            display: block;
-            width: 260px;
-            background: #123458;
-            color: #D4C9BE;
-            padding: 15px;
-            margin: 15px auto;
-            text-align: center;
+        input {
+            background: #D4C9BE;
+            width: 90%;
+            padding: 12px;
+            margin: 8px 8px;
             border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
+            border: 1px solid #ccc;
         }
-
-        .btn-menu:hover {
-            background: #123460;
-            transform: scale(1.03);
+        select {
+            background: #D4C9BE;
+            width: 97%;
+            padding: 12px;
+            margin: 10px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            display: block; 
+            width: 40%;
+            margin: 10px auto;
+            tex-aling: center;
+            background-color: #D4C9BE;
+            color: #123458;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .form-container button {
+            align-self: center;
+            margin-top: 10px;
+            margin-bottom: 5px;   /* Esto asegura que NO quede por fuera */
         }
         
         h2 {
@@ -181,12 +202,9 @@
     </style>
 
 </head>
-<body>
-
-    <header>
-    <div>
-        Bienvenido, <strong><%= usuario %></strong>
-    </div>
+    <body>
+        <header>
+    <h1>Hola, <%= nombreUsuario %></h1>
 
     <div class="right-buttons">
         <form action="perfil.jsp" style="display:inline;">
@@ -245,10 +263,21 @@
     </div>
 
     <div class="derecha">
-        <h2>Panel Principal</h2>
+        <h2>Agregar Sesion</h2>
+        
+        <form action="SesionServlet" method="post">
+                <input type="hidden" name="accion" value="agregar">
+                
+                <input type="text" name="nombre_sesion" placeholder="Nombre" required>
+                <input type="text" name="descripciones" placeholder="Descripcion" required>
+                <input type="date" name="fecha_inicio" placeholder="Inicio" required>
+                <input type="date" name="fecha_fin" placeholder="Fin" required>
+                <input type="text" name="lugar" placeholder="Lugar" required>
+                
+                <button type="submit">Agregar</button>
+        </form>
 
-    <a href="actividad.jsp" class="btn-menu">Actividad</a>
-    <a href="sesion.jsp" class="btn-menu">Sesión</a>
+    
     </div>
 
 </div>

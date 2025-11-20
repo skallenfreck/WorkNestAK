@@ -3,14 +3,14 @@
 <%@ page import="java.util.GregorianCalendar" %>
 
 <%
-    // Obtener usuario desde sesión
-    String usuario = (String) session.getAttribute("usuario");
-
-    // Si no hay usuario, redirigir al login
-    if (usuario == null) {
+    // Recuperar usuario en sesión
+    HttpSession sesion = request.getSession(false);
+    if (sesion == null || sesion.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+
+    String nombreUsuario = (String) sesion.getAttribute("usuario");
 %>
 
 <%
@@ -137,8 +137,13 @@
 
         /* PANEL DERECHO */
         .derecha {
+            background: #F1EFEC;
             width: 75%;
-            padding: 25px;
+            justify-content: center;       
+            align-items: flex-start; 
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .titulo {
@@ -153,23 +158,39 @@
             color: #444;
         }
         
-        .btn-menu {
-            display: block;
-            width: 260px;
-            background: #123458;
-            color: #D4C9BE;
-            padding: 15px;
-            margin: 15px auto;
-            text-align: center;
+        input {
+            background: #D4C9BE;
+            width: 90%;
+            padding: 12px;
+            margin: 8px 8px;
             border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
+            border: 1px solid #ccc;
         }
-
-        .btn-menu:hover {
-            background: #123460;
-            transform: scale(1.03);
+        select {
+            background: #D4C9BE;
+            width: 97%;
+            padding: 12px;
+            margin: 10px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            display: block; 
+            width: 40%;
+            margin: 10px auto;
+            tex-aling: center;
+            background-color: #D4C9BE;
+            color: #123458;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .form-container button {
+            align-self: center;
+            margin-top: 10px;
+            margin-bottom: 5px;   /* Esto asegura que NO quede por fuera */
         }
         
         h2 {
@@ -183,10 +204,8 @@
 </head>
 <body>
 
-    <header>
-    <div>
-        Bienvenido, <strong><%= usuario %></strong>
-    </div>
+<header>
+    <h1>Hola, <%= nombreUsuario %></h1>
 
     <div class="right-buttons">
         <form action="perfil.jsp" style="display:inline;">
@@ -198,60 +217,52 @@
         </form>
     </div>
 </header>
-    
+
 <div class="contenedor">
-
     <div class="izquierda">
-
-        <div class="titulo-cal">
-            <%= meses[month] %> <%= year %>
-        </div>
-
-        <div class="contenedor-calendario">
-            <table class="calendario">
-                <tr>
-                    <% for (String d : dias) { %>
-                    <th><%= d %></th>
-                    <% } %>
-                </tr>
-
-                <tr>
-                    <% 
-                        int col = 1;
-                        for (int i = 1; i < firstDayOfWeek; i++) {
-                    %>
-                        <td></td>
-                    <% col++; } %>
-
-                    <% for (int day = 1; day <= daysInMonth; day++) { %>
-                        <% 
-                            boolean isToday = (day == today);
-                        %>
-
-                        <td class="<%= isToday ? "hoy" : "" %>">
-                            <%= day %>
-                        </td>
-
-                        <% 
-                            if (col % 7 == 0) out.print("</tr><tr>");
-                            col++;
-                        %>
-                    <% } %>
-
-                </tr>
-            </table>
-        </div>
-
+        <h3>Panel Administrador</h3>
+        
+        <a href="agregarUsuario.jsp" class="btn-admin">Agregar Usuario</a>
+        <a href="editarUsuario.jsp" class="btn-admin">Editar Usuario</a>
+        <a href="usuarioServlet?accion=listar" class="btn-admin">Listar Usuarios</a>
+        <a href="eliminarUsuario.jsp" class="btn-admin">Eliminar Usuario</a>
     </div>
 
     <div class="derecha">
-        <h2>Panel Principal</h2>
+        <h2>Lista de Usuarios</h2>
 
-    <a href="actividad.jsp" class="btn-menu">Actividad</a>
-    <a href="sesion.jsp" class="btn-menu">Sesión</a>
-    </div>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Usuario</th>
+                <th>Perfil</th>
+            </tr>
 
-</div>
+<%
+    java.util.List<modelo.usuario> lista = 
+        (java.util.List<modelo.usuario>) request.getAttribute("listaUsuario");
 
+    if (lista != null) {
+        for (modelo.usuario u : lista) {
+%>
+            <tr>
+                <td><%= u.getIdentificacion() %></td>
+                <td><%= u.getNombre() %></td>
+                <td><%= u.getApellido() %></td>
+                <td><%= u.getUsuario() %></td>
+                <td><%= u.getIdPerfil() == 1 ? "Estudiante" : "Administrador" %></td>
+            </tr>
+<%
+        }
+    }
+%>
+
+
+</table>
+
+</div></div>
 </body>
 </html>
+

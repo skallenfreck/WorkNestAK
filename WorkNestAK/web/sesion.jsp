@@ -245,10 +245,13 @@
     </div>
 
     <div class="derecha">
-        <h2>Panel Principal</h2>
+        <h2>Sesiones</h2>
 
-    <a href="actividad.jsp" class="btn-menu">Actividad</a>
-    <a href="sesion.jsp" class="btn-menu">Sesión</a>
+    <a href="agregarSesion.jsp" class="btn-menu">Agregar</a>
+    <a href="editarSesion.jsp" class="btn-menu">Editar</a>
+    <a href="listarSesion.jsp" class="btn-menu">Listar</a>
+    <a href="eliminarSesion.jsp" class="btn-menu">Eliminar</a>
+    
     </div>
 
 </div>
