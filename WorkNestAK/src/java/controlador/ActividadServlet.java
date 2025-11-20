@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controlador;
 
 import java.io.IOException;
@@ -98,7 +95,6 @@ public class ActividadServlet extends HttpServlet {
 
         dao.agregar(a);
 
-        listar(request, response);
     }
 
     // CARGAR DATOS PARA EDITAR -----------------------------------------

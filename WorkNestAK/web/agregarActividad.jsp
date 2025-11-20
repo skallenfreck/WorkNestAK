@@ -220,9 +220,6 @@
     <h1>Hola, <%= nombreUsuario %></h1>
 
     <div class="right-buttons">
-        <form action="perfil.jsp" style="display:inline;">
-            <button type="submit">Ver Perfil</button>
-        </form>
 
         <form action="cerrarSesionServlet" method="get">
             <button type="submit" class="btnLogout">Cerrar sesión</button>
@@ -288,7 +285,7 @@
                 <button type="submit">Agregar</button>
         </form>
 
-    <form action="sesion.jsp" method="get">
+    <form action="actividad.jsp" method="get">
     <button type="submit">Volver</button>
 </form>
     </div>

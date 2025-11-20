@@ -189,9 +189,7 @@
     </div>
 
     <div class="right-buttons">
-        <form action="perfil.jsp" style="display:inline;">
-            <button type="submit">Ver Perfil</button>
-        </form>
+
 
         <form action="cerrarSesionServlet" method="get">
             <button type="submit" class="btnLogout">Cerrar sesión</button>

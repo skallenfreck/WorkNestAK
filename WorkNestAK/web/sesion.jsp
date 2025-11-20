@@ -189,9 +189,7 @@
     </div>
 
     <div class="right-buttons">
-        <form action="perfil.jsp" style="display:inline;">
-            <button type="submit">Ver Perfil</button>
-        </form>
+
 
         <form action="cerrarSesionServlet" method="get">
             <button type="submit" class="btnLogout">Cerrar sesión</button>
@@ -249,8 +247,12 @@
 
     <a href="agregarSesion.jsp" class="btn-menu">Agregar</a>
     <a href="editarSesion.jsp" class="btn-menu">Editar</a>
-    <a href="listarSesion.jsp" class="btn-menu">Listar</a>
+    <a href="SesionServlet?accion=listar.jsp" class="btn-menu">Listar</a>
     <a href="eliminarSesion.jsp" class="btn-menu">Eliminar</a>
+    
+    <form action="estudianteDS.jsp" method="get">
+    <button type="submit">Volver</button>
+    </form>
     
     </div>
 
