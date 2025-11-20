@@ -28,6 +28,42 @@ public class sesionDAO {
         }
     }
 
+    public sesion consultarSesion(String nombre) {
+        conexion cn = new conexion();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        sesion s = null;
+
+        String sql = "SELECT * FROM sesiones WHERE nombre_sesion=?";
+
+        try {
+            con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+
+            if(rs.next()) {
+                s = new sesion();
+                s.setNombre_sesion(rs.getString("nombre_sesion"));
+                s.setDescripcions(rs.getString("descripcions"));
+                s.setFecha_inicio(rs.getString("fecha_inicio"));
+                s.setFecha_fin(rs.getString("fecha_fin"));
+                s.setLugar(rs.getString("lugar"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar usuario: " + e.getMessage());
+        } finally {
+            try { if(rs != null) rs.close(); } catch(Exception e) {}
+            try { if(ps != null) ps.close(); } catch(Exception e) {}
+            try { if(con != null) con.close(); } catch(Exception e) {}
+        }
+        return s;
+    }
+    
     // ACTUALIZAR
     public boolean actualizarSesion(sesion s) {
         String sql = "UPDATE sesiones SET nombre_sesion=?, descripcions=?, fecha_inicio=?, fecha_fin=?, lugar=? WHERE id_sesion=?";

@@ -26,17 +26,39 @@ public class SesionServlet extends HttpServlet {
 
         switch (accion) {
 
+            case "buscar":
+                String idBuscar = request.getParameter("nombre_sesion");
+                sesion sesionBuscado = dao.consultarSesion(idBuscar);
+
+                if (sesionBuscado != null) {
+                    request.setAttribute("sesion", sesionBuscado);
+                    request.getRequestDispatcher("editarSesion.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Sesion no encontrada");
+                    request.getRequestDispatcher("editarSesion.jsp").forward(request, response);
+                }
+                break;
+            
             case "listar":
                 listar(request, response);
                 break;
 
-            case "buscar":
-                buscar(request, response);
-                break;
 
             case "editar":
                 editar(request, response);
                 break;
+                
+            case "ConsultarEliminar":
+    String idBuscarC = request.getParameter("nombre_sesion");
+    sesion sesionEliminar = dao.consultarSesion(idBuscarC);
+    if (sesionEliminar != null) {
+        request.setAttribute("sesion", sesionEliminar);
+        request.getRequestDispatcher("eliminarSesion.jsp").forward(request, response);
+    } else {
+        request.setAttribute("sesion", null);
+        request.getRequestDispatcher("eliminarSesion.jsp").forward(request, response);
+    }
+    break;    
 
             case "eliminar":
                 eliminar(request, response);
@@ -116,20 +138,20 @@ public class SesionServlet extends HttpServlet {
     }
 
     private void actualizar(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws ServletException, IOException {
 
-        sesion s = new sesion();
+        int id = Integer.parseInt(request.getParameter("id_sesion"));
+        String nombre = request.getParameter("nombre_sesion");
+        String desc = request.getParameter("descripcions");
+        String inicio = request.getParameter("fecha_inicio");
+        String fin = request.getParameter("fecha_fin");
+        String lugar = request.getParameter("lugar");
 
-        s.setId_sesion(Integer.parseInt(request.getParameter("id_sesion")));
-        s.setNombre_sesion(request.getParameter("nombre_sesion"));
-        s.setDescripcions(request.getParameter("descripcions"));
-        s.setFecha_inicio(request.getParameter("fecha_inicio"));
-        s.setFecha_fin(request.getParameter("fecha_fin"));
-        s.setLugar(request.getParameter("lugar"));
+        sesion s = new sesion(id, nombre, desc, inicio, fin, lugar);
 
         dao.actualizarSesion(s);
 
-        response.sendRedirect("SesionServlet?accion=listar");
+        listar(request, response);
     }
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response)

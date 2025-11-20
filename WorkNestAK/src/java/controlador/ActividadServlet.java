@@ -25,6 +25,19 @@ public class ActividadServlet extends HttpServlet {
 
         switch (accion) {
 
+            case "buscar":
+                String idBuscar = request.getParameter("nombre_actividad");
+                actividad actividadBuscado = dao.consultarActividad(idBuscar);
+
+                if (actividadBuscado != null) {
+                    request.setAttribute("actividad", actividadBuscado);
+                    request.getRequestDispatcher("editarActividad.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Actividad no encontrada");
+                    request.getRequestDispatcher("editarActividad.jsp").forward(request, response);
+                }
+                break;
+                
             case "listar":
                 listar(request, response);
                 break;

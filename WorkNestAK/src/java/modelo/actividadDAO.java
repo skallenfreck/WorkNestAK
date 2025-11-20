@@ -38,6 +38,38 @@ public class actividadDAO {
 
         return lista;
     }
+    
+    public actividad consultarActividad(String nombre) {
+        conexion cn = new conexion();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        actividad a = null;
+
+        String sql = "SELECT * FROM actividades WHERE nombre_actividad=?";
+
+        try {
+            con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+
+            if(rs.next()) {
+                a = new actividad();
+                a.setNombre_actividad(rs.getString("nombre_actividad"));
+                a.setDescripciona(rs.getString("descripciona"));
+                a.setEnlace(rs.getString("enlace"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar usuario: " + e.getMessage());
+        } finally {
+            try { if(rs != null) rs.close(); } catch(Exception e) {}
+            try { if(ps != null) ps.close(); } catch(Exception e) {}
+            try { if(con != null) con.close(); } catch(Exception e) {}
+        }
+        return a;
+    }
 
     // AGREGAR -----------------------------------------------------
     public int agregar(actividad a) {
