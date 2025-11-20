@@ -158,22 +158,25 @@
             color: #444;
         }
         
-        input {
-            background: #D4C9BE;
-            width: 90%;
-            padding: 12px;
-            margin: 8px 8px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .derecha table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            background: white;
         }
-        select {
-            background: #D4C9BE;
-            width: 97%;
-            padding: 12px;
-            margin: 10px 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .derecha table th, 
+        .derecha table td {
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
         }
+        .derecha table th {
+            background: #123458;
+            color: #D4C9BE;
+        }
+        
+        
+       
         button {
             display: block; 
             width: 40%;
@@ -181,6 +184,19 @@
             tex-aling: center;
             background-color: #D4C9BE;
             color: #123458;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .btn_volver {
+            display: block; 
+            width: 40%;
+            margin: 10px auto;
+            tex-aling: center;
+            background-color: #123458;
+            color: #D4C9BE;
             padding: 10px;
             border: none;
             border-radius: 8px;
@@ -203,8 +219,7 @@
 
 </head>
 <body>
-
-<header>
+        <header>
     <h1>Hola, <%= nombreUsuario %></h1>
 
     <div class="right-buttons">
@@ -217,52 +232,96 @@
         </form>
     </div>
 </header>
-
+    
 <div class="contenedor">
+
     <div class="izquierda">
-        <h3>Panel Administrador</h3>
-        
-        <a href="agregarUsuario.jsp" class="btn-admin">Agregar Usuario</a>
-        <a href="editarUsuario.jsp" class="btn-admin">Editar Usuario</a>
-        <a href="usuarioServlet?accion=listar" class="btn-admin">Listar Usuarios</a>
-        <a href="eliminarUsuario.jsp" class="btn-admin">Eliminar Usuario</a>
+
+        <div class="titulo-cal">
+            <%= meses[month] %> <%= year %>
+        </div>
+
+        <div class="contenedor-calendario">
+            <table class="calendario">
+                <tr>
+                    <% for (String d : dias) { %>
+                    <th><%= d %></th>
+                    <% } %>
+                </tr>
+
+                <tr>
+                    <% 
+                        int col = 1;
+                        for (int i = 1; i < firstDayOfWeek; i++) {
+                    %>
+                        <td></td>
+                    <% col++; } %>
+
+                    <% for (int day = 1; day <= daysInMonth; day++) { %>
+                        <% 
+                            boolean isToday = (day == today);
+                        %>
+
+                        <td class="<%= isToday ? "hoy" : "" %>">
+                            <%= day %>
+                        </td>
+
+                        <% 
+                            if (col % 7 == 0) out.print("</tr><tr>");
+                            col++;
+                        %>
+                    <% } %>
+
+                </tr>
+            </table>
+        </div>
+
     </div>
 
     <div class="derecha">
-        <h2>Lista de Usuarios</h2>
-
+        <h2>Sesiones</h2>
+        
         <table border="1" cellpadding="10">
             <tr>
-                <th>Identificación</th>
+                <th>Id_Sesion</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Usuario</th>
-                <th>Perfil</th>
+                <th>Descripcion</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Lugar</th>
             </tr>
 
 <%
-    java.util.List<modelo.usuario> lista = 
-        (java.util.List<modelo.usuario>) request.getAttribute("listaUsuario");
+    java.util.List<modelo.sesion> lista = 
+        (java.util.List<modelo.sesion>) request.getAttribute("listaSesion");
 
     if (lista != null) {
-        for (modelo.usuario u : lista) {
+        for (modelo.sesion s : lista) {
 %>
             <tr>
-                <td><%= u.getIdentificacion() %></td>
-                <td><%= u.getNombre() %></td>
-                <td><%= u.getApellido() %></td>
-                <td><%= u.getUsuario() %></td>
-                <td><%= u.getIdPerfil() == 1 ? "Estudiante" : "Administrador" %></td>
+                <td><%= s.getId_sesion () %></td>
+                <td><%= s.getNombre_sesion() %></td>
+                <td><%= s.getDescripcions() %></td>
+                <td><%= s.getFecha_inicio() %></td>
+                <td><%= s.getFecha_fin() %></td>
+                <td><%= s.getLugar() %></td>
             </tr>
 <%
         }
     }
 %>
 
+<form action="sesion.jsp" method="get" class="btn_volver">
+    <button type="submit">Volver</button>
+</form>
+
 
 </table>
 
-</div></div>
+    
+    </div>
+
+</div>
+
 </body>
 </html>
-

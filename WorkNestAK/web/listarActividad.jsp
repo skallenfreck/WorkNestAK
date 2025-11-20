@@ -158,22 +158,25 @@
             color: #444;
         }
         
-        input {
-            background: #D4C9BE;
-            width: 90%;
-            padding: 12px;
-            margin: 8px 8px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .derecha table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            background: white;
         }
-        select {
-            background: #D4C9BE;
-            width: 97%;
-            padding: 12px;
-            margin: 10px 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .derecha table th, 
+        .derecha table td {
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
         }
+        .derecha table th {
+            background: #123458;
+            color: #D4C9BE;
+        }
+        
+        
+       
         button {
             display: block; 
             width: 40%;
@@ -215,7 +218,7 @@
     </style>
 
 </head>
-    <body>
+<body>
         <header>
     <h1>Hola, <%= nombreUsuario %></h1>
 
@@ -276,23 +279,42 @@
     </div>
 
     <div class="derecha">
-        <h2>Agregar Sesion</h2>
+        <h2>Actividades</h2>
         
-        <form action="SesionServlet" method="post">
-                <input type="hidden" name="accion" value="agregar">
-                
-                <input type="text" name="nombre_sesion" placeholder="Nombre" required>
-                <input type="text" name="descripciones" placeholder="Descripcion" required>
-                <input type="date" name="fecha_inicio" placeholder="Inicio" required>
-                <input type="date" name="fecha_fin" placeholder="Fin" required>
-                <input type="text" name="lugar" placeholder="Lugar" required>
-                
-                <button type="submit">Agregar</button>
-        </form>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Id_Actividad</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Enlace</th>
+            </tr>
 
-    <form action="sesion.jsp" method="get">
+<%
+    java.util.List<modelo.actividad> lista = 
+        (java.util.List<modelo.actividad>) request.getAttribute("listaActividad");
+
+    if (lista != null) {
+        for (modelo.actividad a : lista) {
+%>
+            <tr>
+                <td><%= a.getId_actividad () %></td>
+                <td><%= a.getNombre_actividad() %></td>
+                <td><%= a.getDescripciona() %></td>
+                <td><%= a.getEnlace() %></td>
+            </tr>
+<%
+        }
+    }
+%>
+
+<form action="actividad.jsp" method="get" class="btn_volver">
     <button type="submit">Volver</button>
 </form>
+
+
+</table>
+
+    
     </div>
 
 </div>

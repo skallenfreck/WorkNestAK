@@ -276,16 +276,14 @@
     </div>
 
     <div class="derecha">
-        <h2>Agregar Sesion</h2>
+        <h2>Agregar Actividad</h2>
         
-        <form action="SesionServlet" method="post">
+        <form action="ActividadServlet" method="post">
                 <input type="hidden" name="accion" value="agregar">
                 
-                <input type="text" name="nombre_sesion" placeholder="Nombre" required>
-                <input type="text" name="descripciones" placeholder="Descripcion" required>
-                <input type="date" name="fecha_inicio" placeholder="Inicio" required>
-                <input type="date" name="fecha_fin" placeholder="Fin" required>
-                <input type="text" name="lugar" placeholder="Lugar" required>
+                <input type="text" name="nombre_actividad" placeholder="Nombre" required>
+                <input type="text" name="descripciona" placeholder="Descripcion" required>
+                <input type="date" name="enlace" placeholder="Enlace" required>
                 
                 <button type="submit">Agregar</button>
         </form>

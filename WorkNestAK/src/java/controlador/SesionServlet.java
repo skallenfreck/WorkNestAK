@@ -105,7 +105,7 @@ public class SesionServlet extends HttpServlet {
         sesion s = new sesion();
 
         s.setNombre_sesion(request.getParameter("nombre_sesion"));
-        s.setDescripciones(request.getParameter("descripciones"));
+        s.setDescripcions(request.getParameter("descripcions"));
         s.setFecha_inicio(request.getParameter("fecha_inicio"));
         s.setFecha_fin(request.getParameter("fecha_fin"));
         s.setLugar(request.getParameter("lugar"));
@@ -122,7 +122,7 @@ public class SesionServlet extends HttpServlet {
 
         s.setId_sesion(Integer.parseInt(request.getParameter("id_sesion")));
         s.setNombre_sesion(request.getParameter("nombre_sesion"));
-        s.setDescripciones(request.getParameter("descripciones"));
+        s.setDescripcions(request.getParameter("descripcions"));
         s.setFecha_inicio(request.getParameter("fecha_inicio"));
         s.setFecha_fin(request.getParameter("fecha_fin"));
         s.setLugar(request.getParameter("lugar"));

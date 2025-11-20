@@ -3,16 +3,17 @@ package modelo;
 public class sesion {
     private int id_sesion;
     private String nombre_sesion;
-    private String descripciones;
+    private String descripcions;
     private String fecha_inicio;
     private String fecha_fin;
     private String lugar;
 
     // Constructor
-    public sesion(String nombreSesion, String fechaInicio, String fechaFin, String lugar) {
-        this.nombre_sesion = nombreSesion;
-        this.fecha_inicio = fechaInicio;
-        this.fecha_fin = fechaFin;
+    public sesion(String nombre_sesion, String descripcions, String fecha_inicio, String fecha_fin, String lugar) {
+        this.nombre_sesion = nombre_sesion;
+        this.descripcions = descripcions;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
         this.lugar = lugar;
     }
 
@@ -21,10 +22,10 @@ public class sesion {
     
 
     // Constructor con ID (para cuando se recupere de la base de datos)
-    public sesion(int id_sesion, String nombre_sesion, String descripciones, String fecha_inicio, String fecha_fin, String lugar) {
+    public sesion(int id_sesion, String nombre_sesion, String descripcions, String fecha_inicio, String fecha_fin, String lugar) {
         this.id_sesion = id_sesion;
         this.nombre_sesion = nombre_sesion;
-        this.descripciones = descripciones;
+        this.descripcions = descripcions;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
         this.lugar = lugar;
@@ -46,12 +47,12 @@ public class sesion {
         this.nombre_sesion = nombre_sesion;
     }
 
-    public String getDescripciones() {
-        return descripciones;
+    public String getDescripcions() {
+        return descripcions;
     }
 
-    public void setDescripciones(String descripciones) {
-        this.descripciones = descripciones;
+    public void setDescripcions(String descripcions) {
+        this.descripcions = descripcions;
     }
 
     public String getFecha_inicio() {

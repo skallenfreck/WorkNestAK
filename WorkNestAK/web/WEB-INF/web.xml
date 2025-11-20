@@ -20,6 +20,10 @@
         <servlet-name>SesionServlet</servlet-name>
         <servlet-class>controlador.SesionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActividadServlet</servlet-name>
+        <servlet-class>controlador.ActividadServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>SesionServlet</servlet-name>
         <url-pattern>/SesionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActividadServlet</servlet-name>
+        <url-pattern>/ActividadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

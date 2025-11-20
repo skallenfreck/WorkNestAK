@@ -13,11 +13,11 @@ public class sesionDAO {
 
     // AGREGAR
     public void agregarSesion(sesion s) {
-        String sql = "INSERT INTO sesiones (nombre_sesion, descripciones, fecha_inicio, fecha_fin, lugar) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sesiones (nombre_sesion, descripcions, fecha_inicio, fecha_fin, lugar) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, s.getNombre_sesion());
-            ps.setString(2, s.getDescripciones());
+            ps.setString(2, s.getDescripcions());
             ps.setString(3, s.getFecha_inicio());
             ps.setString(4, s.getFecha_fin());
             ps.setString(5, s.getLugar());
@@ -30,11 +30,11 @@ public class sesionDAO {
 
     // ACTUALIZAR
     public boolean actualizarSesion(sesion s) {
-        String sql = "UPDATE sesiones SET nombre_sesion=?, descripciones=?, fecha_inicio=?, fecha_fin=?, lugar=? WHERE id_sesion=?";
+        String sql = "UPDATE sesiones SET nombre_sesion=?, descripcions=?, fecha_inicio=?, fecha_fin=?, lugar=? WHERE id_sesion=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, s.getNombre_sesion());
-            ps.setString(2, s.getDescripciones());
+            ps.setString(2, s.getDescripcions());
             ps.setString(3, s.getFecha_inicio());
             ps.setString(4, s.getFecha_fin());
             ps.setString(5, s.getLugar());
@@ -107,7 +107,7 @@ public class sesionDAO {
 
         s.setId_sesion(rs.getInt("id_sesion"));
         s.setNombre_sesion(rs.getString("nombre_sesion"));
-        s.setDescripciones(rs.getString("descripciones"));
+        s.setDescripcions(rs.getString("descripcions"));
         s.setFecha_inicio(rs.getString("fecha_inicio"));
         s.setFecha_fin(rs.getString("fecha_fin"));
         s.setLugar(rs.getString("lugar"));
